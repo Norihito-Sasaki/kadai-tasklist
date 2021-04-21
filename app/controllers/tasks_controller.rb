@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
   before_action :set_task, only: [:show, :edit, :update, :destroy ]
-  #before_action :correct_user, only: [:destroy]
+  before_action :correct_user,  [:show, :edit]
   
   def index
     @tasks = current_user.tasks.order(id: :desc)
@@ -48,7 +48,6 @@ class TasksController < ApplicationController
   
   private
   def set_task
-    correct_user
     @task=Task.find(params[:id])
   end 
   
